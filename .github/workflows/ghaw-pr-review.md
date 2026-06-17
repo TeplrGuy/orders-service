@@ -59,10 +59,11 @@ Analyze the pull request and:
 
 **Required before merge:**
 - [ ] CI green
+- [ ] Unit/service-level tests pass
 - [ ] Security scan green
 - [ ] Contract compatibility verified  (include if API shape changed)
 - [ ] Migration plan reviewed  (include if DB changed)
-- [ ] Integration tests pass
+- [ ] End-to-end validation passes
 - [ ] Human code review approval
 - [ ] Load test approved  (include if throughput affected)
 
