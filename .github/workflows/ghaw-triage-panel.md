@@ -4,6 +4,7 @@ on:
   issues:
     types: [opened, edited, reopened, labeled]
 permissions:
+  copilot-requests: write
   contents: read
   issues: read
   pull-requests: read
