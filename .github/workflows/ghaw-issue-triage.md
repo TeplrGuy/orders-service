@@ -45,9 +45,10 @@ When a new issue arrives:
 
 4. **Identify required quality gates**:
    - CI (always required)
+   - Unit or service-level automated tests (always required)
    - Security scan (always required)
    - Contract compatibility check (required if shared-contracts are modified)
-   - Integration tests (required if inter-service calls change)
+   - End-to-end validation through the affected service path (required for implementation changes)
    - Human PR review (always required)
    - Load test (required if throughput or queue processing is impacted)
 
@@ -64,9 +65,10 @@ When a new issue arrives:
 
 **Required quality gates:**
 - [ ] CI
+- [ ] Unit/service-level automated tests
 - [ ] Security
 - [ ] Contract compatibility check  (include if shared-contracts affected)
-- [ ] Integration tests  (include if inter-service calls change)
+- [ ] End-to-end validation through the affected service path
 - [ ] Human PR review
 - [ ] Load test  (include if throughput impact expected)
 
@@ -78,7 +80,8 @@ When a new issue arrives:
 **Evidence expected at PR time:**
 - API response samples / curl output
 - Contract diff if schema changed
-- Integration test report
+- Unit test report
+- End-to-end validation report
 ```
 
 6. **Apply labels** based on classification (bug, enhancement, incident, orders, cross-service, delegated-candidate as appropriate).
