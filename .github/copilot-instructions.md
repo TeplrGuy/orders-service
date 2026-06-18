@@ -38,3 +38,8 @@ This repository owns order creation and order status behavior for the SDLC demo.
 - Do not introduce breaking response changes without updating the linked issue and dependent repos.
 - Do not move gateway concerns into this service.
 - Escalate if a requested change conflicts with the shared contract or demo narrative.
+
+## APM-aligned operations
+- Apply `.github/instructions/apm-aligned-agent-ops.md` for deterministic context loading and cost governance.
+- Keep issue/PR outputs concise and evidence-first.
+- Respect workflow safe-output limits and `max-ai-credits` guardrails.
