@@ -1,4 +1,6 @@
+require('./telemetry');
 const express = require('express');
+const { isValidOrder } = require('./validation');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -45,7 +47,7 @@ app.get('/health', (_req, res) => {
 app.post('/orders', async (req, res) => {
   const { orderId, customerId, sku, quantity } = req.body || {};
   const correlationId = req.header('x-correlation-id') || null;
-  if (!orderId || !customerId || !sku || !Number.isInteger(quantity) || quantity <= 0) {
+  if (!isValidOrder({ orderId, customerId, sku, quantity })) {
     return res.status(400).json({ error: 'orderId, customerId, sku, and positive integer quantity are required.' });
   }
   if (ordersById.has(orderId)) {
