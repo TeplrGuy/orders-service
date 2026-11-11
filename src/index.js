@@ -98,6 +98,19 @@ app.post('/orders', async (req, res, next) => {
 
     if (!reservationResponse.ok) {
       const reservationError = await reservationResponse.json().catch(() => ({}));
+      if (reservationResponse.status !== 409) {
+        order.status = 'failed_downstream';
+        appendTimeline(order, 'inventory_unavailable', {
+          ...reservationError,
+          status: reservationResponse.status
+        });
+        await store.save(order);
+        return res.status(502).json({
+          error: 'downstream_unavailable',
+          order
+        });
+      }
+
       order.status = 'rejected_inventory';
       appendTimeline(order, 'inventory_rejected', reservationError);
       await store.save(order);
