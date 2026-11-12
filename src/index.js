@@ -1,4 +1,5 @@
 const express = require('express');
+const { listOrders } = require('./order-list');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -133,6 +134,18 @@ app.post('/orders', async (req, res) => {
   }
 });
 
+app.get('/orders', (req, res) => {
+  try {
+    return res.status(200).json(listOrders(ordersById.values(), req.query));
+  } catch (error) {
+    if (error instanceof RangeError) {
+      return res.status(400).json({ error: 'invalid_query', message: error.message });
+    }
+    console.error(JSON.stringify({ event: 'order_list_failed', message: error.message }));
+    return res.status(500).json({ error: 'order_list_failed' });
+  }
+});
+
 app.get('/orders/:orderId', (req, res) => {
   const order = ordersById.get(req.params.orderId);
   if (!order) {
@@ -141,6 +154,10 @@ app.get('/orders/:orderId', (req, res) => {
   return res.status(200).json({ order });
 });
 
-app.listen(port, () => {
-  console.log('orders-service listening on port ' + port);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log('orders-service listening on port ' + port);
+  });
+}
+
+module.exports = app;
