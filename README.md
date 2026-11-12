@@ -34,3 +34,13 @@ removes the new list route and callers together, preserving create/get routes.
 This branch uses main's in-memory store, not the separate durable deployment
 foundation. Express stays on its current major with an updated dependency lock.
 
+## Agentic review runtime
+
+The advisory PR review is generated with gh-aw v1.2.2, matching the compile
+workflow's CLI version. Regenerate from Markdown; never hand-edit the lock.
+The [gateway runtime runbook](https://github.com/TeplrGuy/api-gateway/pull/103)
+records the coordinated repair and validation. The previously approved
+250-credit cap does not guarantee runtime success. Safe outputs remain one
+comment and up to three labels, not approval, merge or deployment. Human coverage
+verification and contract/status alignment are still required.
+
